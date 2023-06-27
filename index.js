@@ -11,8 +11,9 @@ app.use("/", express.static(__dirname + "/public"));
 io.on("connection", (socket) => {
   console.log("a user connected", socket.id);
 
-  socket.on("from_client", () => {
-    console.log("Collected a new event from client");
+  socket.on("msg_send", (data) => {
+    console.log(data);
+    io.emit("msg_recieved", data);
   });
 
   //   setInterval(() => {
